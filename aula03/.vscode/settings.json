@@ -2,6 +2,13 @@
     "files.associations": {
         "iosfwd": "cpp",
         "iterator": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "string": "cpp",
+        "iostream": "cpp",
+        "functional": "cpp",
+        "*.tcc": "cpp",
+        "typeinfo": "cpp",
+        "__split_buffer": "cpp",
+        "ios": "cpp"
     }
 }
