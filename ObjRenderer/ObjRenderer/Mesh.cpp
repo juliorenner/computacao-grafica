@@ -3,7 +3,7 @@
 Mesh::Mesh() {
     Group* defaultGroup = new Group("default", "");
     this->groups.push_back(defaultGroup);
-
+    this->mainShader = new Shader("vs.glsl", "fs.glsl");
     this->activeGroup = 0;
 }
 
@@ -63,26 +63,17 @@ void Mesh::prepareGroupsVAO() {
             }
 
             for (int k=0; k < vertsIndex.size(); k++) {
-                glm::vec3 v = this->vertex[vertsIndex[k-1]];
-                glm::vec3 n = this->normals[normsIndex[k-1]];
-                
-                cout << "vertsIndex " << k << vertsIndex[k-1] << "\n";
-                cout << "normsIndex " << k << normsIndex[k-1] << "\n";
-
-                cout << "v->x " << v.x << "\n";
-                cout << "n->x " << n.x << "\n";
+                glm::vec3 v = this->vertex[vertsIndex[k]-1];
+                glm::vec3 n = this->normals[normsIndex[k]-1];
 
                 vs.push_back(v.x);
                 vs.push_back(v.y);
                 vs.push_back(v.z);
-                vs.push_back(n.x);
-                vs.push_back(n.y);
-                vs.push_back(n.z);
+//                vs.push_back(n.x);
+//                vs.push_back(n.y);
+//                vs.push_back(n.z);
             }
         }
-
-        cout << vs.size() << "\n";
-        this->groups[i]->vertexLength = vs.size();
 
         GLuint VBO, VAO = 0;
 
@@ -94,37 +85,41 @@ void Mesh::prepareGroupsVAO() {
         // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferData(GL_ARRAY_BUFFER, vs.size(), &vs[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, vs.size() * sizeof(float), &vs[0], GL_STATIC_DRAW);
 
         // position attribute
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
 
-        // normal attribute
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-        glEnableVertexAttribArray(1);
+//        // normal attribute
+//        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+//        glEnableVertexAttribArray(1);
 
-        glBindVertexArray(0);
 
         this->groups[i]->setVAOIndex(VAO);
     }
 }
 
 void Mesh::draw() {
-    std::string basePath("/Users/juliorenner/Documents/git/computacao-grafica/aula03/");
-    std::string vertexPath = basePath + std::string("vs.glsl");
-    std::string fragmentPath = basePath + std::string("fs.glsl");
-    Shader mainShader(vertexPath.c_str(), fragmentPath.c_str());
-
     for (int i=0; i < this->groups.size(); i++) {
         GLuint VAO = this->groups[i]->getVAOIndex();
-
-        mainShader.use();
-
+        
+        mainShader->use();
+        // create transformations
+        glm::mat4 projection, model, view;
+        model = glm::rotate(model, (float)glfwGetTime(), glm::vec3(0.5f, 1.0f, 0.0f));
+        view  = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+        // retrieve the matrix uniform locations
+        unsigned int modelLoc = glGetUniformLocation(mainShader->ID, "model");
+        unsigned int viewLoc  = glGetUniformLocation(mainShader->ID, "view");
+        // pass them to the shaders (3 different ways)
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, &view[0][0]);
+        // note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
+        projection = glm::perspective(glm::radians(45.0f), (float)1000 / (float)1000, 0.1f, 100.0f);
+        mainShader->setMat4("projection", projection);
+        
         glBindVertexArray(VAO);
-        int length = this->groups[i]->vertexLength;
-        cout << length << "\n";
-        glDrawArrays(GL_TRIANGLES, 0, length);
-        glBindVertexArray(0);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 }

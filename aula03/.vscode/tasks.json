@@ -8,7 +8,8 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-g", "main.cpp", "Mesh.cpp", "Group.cpp", "Face.cpp"
+                "-g", "-Wall", "-framework", "Cocoa", "-framework", "OpenGL", "-framework", "IOKit",
+                "-lglew", "-lglfw", "main.cpp", "Mesh.cpp", "Group.cpp", "Face.cpp", "ObjReader.cpp"
             ],
             "group": {
                 "kind": "build",

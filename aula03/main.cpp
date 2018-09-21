@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "Shader.h"
+#include "ObjReader.h"
 
 using namespace std;
 
@@ -10,6 +11,7 @@ void read();
 void drawScene();
 void prepareVertexArray();
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+void processInput();
 
 GLFWwindow *window;
 
@@ -32,7 +34,7 @@ int main () {
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
     #endif
 
-    window = glfwCreateWindow (640, 480, "OpenGL exercise", NULL, NULL);
+    window = glfwCreateWindow (1000, 1000, "OpenGL exercise", NULL, NULL);
     
     if (!window) {
         fprintf (stderr, "ERROR: could not open window with GLFW3\n");
@@ -47,21 +49,30 @@ int main () {
     glewExperimental = GL_TRUE;
     glewInit();
     
-    mesh = new Mesh();
-
     read();
 
     mesh->prepareGroupsVAO();
 
     while (!glfwWindowShouldClose(window)) {
-        // mesh->draw();
+        void processInput();
+        
+        glClearColor(0.0f, 0.73f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
 
+        mesh->draw();
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();    
     }
+
+    glfwTerminate();
+    return 0;
 
     cout << "TESTE\n";
 }
 
 void read() {
+    mesh = new Mesh();
     mesh->addVertex(1,1,1);
     mesh->addVertex(-1,1,1);
     mesh->addVertex(-1,-1,1);
@@ -179,6 +190,11 @@ void read() {
 //     mesh->
 // }
 
+// void read() {
+//     ObjReader* reader = new ObjReader("mesa.o");
+//     mesh = reader->readFile();
+// }
+
 void drawScene() {
 
 }
@@ -186,4 +202,10 @@ void drawScene() {
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
+}
+
+void processInput()
+{
+    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
 }

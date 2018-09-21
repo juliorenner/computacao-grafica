@@ -6,6 +6,8 @@
 #include <vector> 
 #include <iostream>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "Group.h"
 #include "Shader.h"
 
@@ -18,6 +20,7 @@ class Mesh {
         vector<glm::vec3> normals;
         vector<Group*> groups;
         int activeGroup;
+        Shader* mainShader;
 
     public:
         Mesh();
