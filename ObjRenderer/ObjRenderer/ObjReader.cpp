@@ -9,7 +9,7 @@ ObjReader::ObjReader(string filename) {
     }
 };
 
-void ObjReader::readFile() {
+Mesh* ObjReader::readFile() {
     this->mesh = new Mesh();
     
     while(!this->file.eof()) {

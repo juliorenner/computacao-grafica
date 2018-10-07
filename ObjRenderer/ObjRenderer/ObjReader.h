@@ -18,7 +18,7 @@ class ObjReader {
 
     public:
         ObjReader(string filename);
-        void readFile();
+        Mesh* readFile();
 };
 
 #endif // MESH_H
