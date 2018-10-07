@@ -2,7 +2,6 @@
 
 ObjReader::ObjReader(string filename) {
     this->filename = filename;
-//    string filepath = "./" + string(filename);
     this->file.open(filename);
 
     if(this->file.fail()) {
@@ -10,8 +9,8 @@ ObjReader::ObjReader(string filename) {
     }
 };
 
-Mesh* ObjReader::readFile() {
-    Mesh* mesh = new Mesh();
+void ObjReader::readFile() {
+    this->mesh = new Mesh();
     
     while(!this->file.eof()) {
         string line;
@@ -40,47 +39,44 @@ Mesh* ObjReader::readFile() {
             vector<int> vert;
             vector<int> norm;
             vector<int> text;
+            string token, v, n, t;
             
-            string v1, v2, v3;
-            sline >> v1 >> v2 >> v3; // v/t/n, por exemplo
-            stringstream stoken1(v1);
-            
-            string v, n, t;
-            
-            getline(stoken1, v, '/');
-            getline(stoken1, n, '/');
-            getline(stoken1, t, '/');
-            
-            vert.push_back(stoi(v));
-            norm.push_back(stoi(n));
-            text.push_back(stoi(t));
-            
-            stringstream stoken2(v2);
-            
-            getline(stoken2, v, '/');
-            getline(stoken2, n, '/');
-            getline(stoken2, t, '/');
-            
-            vert.push_back(stoi(v));
-            norm.push_back(stoi(n));
-            text.push_back(stoi(t));
-            
-            stringstream stoken3(v3);
-            
-            getline(stoken3, v, '/');
-            getline(stoken3, n, '/');
-            getline(stoken3, t, '/');
-            
-            vert.push_back(stoi(v));
-            norm.push_back(stoi(n));
-            text.push_back(stoi(t));
-            
+            while (sline.rdbuf()->in_avail()) {
+                sline >> token;
+                stringstream stoken(token);
+                
+                getline(stoken, v, '/');
+                getline(stoken, n, '/');
+                getline(stoken, t, '/');
+                
+                if (vert.size() == 3) {
+                    mesh->addFace(vert, norm, text);
+                    vert[1] = stoi(v)-1;
+                    norm[1] = stoi(n)-1;
+                    text[1] = stoi(t)-1;
+                } else {
+                    vert.push_back(stoi(v)-1);
+                    norm.push_back(stoi(n)-1);
+                    text.push_back(stoi(t)-1);
+                }
+            }
             
             mesh->addFace(vert, norm, text);
+        } else if (temp == "g") {
+            string groupName;
+            sline >> groupName;
+            if (mesh->getGroups().size() == 1) {
+                mesh->getGroups()[0]->setName(groupName);
+            } else {
+                mesh->newGroup(groupName);
+            }
+        } else if (temp == "mtllib") {
+            //Duvida arquivo de material, 1 por objeto? separar em uma classe distinta faz sentido?
         }
-        
-        
     }
-
     return mesh;
+}
+
+void ObjReader::addFace(stringstream sline) {
+    
 }

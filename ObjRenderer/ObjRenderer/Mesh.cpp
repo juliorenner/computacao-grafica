@@ -24,8 +24,8 @@ void Mesh::addVertex(float x, float y, float z) {
     this->vertex.push_back(vertex);
 }
 
-int Mesh::newGroup(string name, string material) {
-    Group* group = new Group(name, material);
+int Mesh::newGroup(string name) {
+    Group* group = new Group(name, "");
     this->groups.push_back(group);
 
     int groupIndex = this->groups.size() - 1;
@@ -33,6 +33,14 @@ int Mesh::newGroup(string name, string material) {
     this->setActiveGroup(groupIndex);
 
     return groupIndex;
+}
+
+void Mesh::setGroupMaterialID(string material) {
+    this->groups[this->activeGroup]->setMaterial(material);
+}
+
+void Mesh::setMaterialFile(string materialFile) {
+    this->materialFile = materialFile;
 }
 
 void Mesh::setActiveGroup(int index) {
@@ -49,6 +57,10 @@ void Mesh::addFace(Face* face) {
     group->addFace(face);
 }
 
+vector<Group*> Mesh::getGroups() {
+    return this->groups;
+}
+
 void Mesh::prepareGroupsVAO() {
     vector<float> vs;
 
@@ -63,15 +75,15 @@ void Mesh::prepareGroupsVAO() {
             }
 
             for (int k=0; k < vertsIndex.size(); k++) {
-                glm::vec3 v = this->vertex[vertsIndex[k]-1];
-                glm::vec3 n = this->normals[normsIndex[k]-1];
+                glm::vec3 v = this->vertex[vertsIndex[k]];
+                glm::vec3 n = this->normals[normsIndex[k]];
 
                 vs.push_back(v.x);
                 vs.push_back(v.y);
                 vs.push_back(v.z);
-//                vs.push_back(n.x);
-//                vs.push_back(n.y);
-//                vs.push_back(n.z);
+                vs.push_back(n.x);
+                vs.push_back(n.y);
+                vs.push_back(n.z);
             }
         }
 
@@ -91,9 +103,9 @@ void Mesh::prepareGroupsVAO() {
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
 
-//        // normal attribute
-//        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-//        glEnableVertexAttribArray(1);
+        // normal attribute
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
 
 
         this->groups[i]->setVAOIndex(VAO);

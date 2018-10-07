@@ -13,10 +13,12 @@ class ObjReader {
     private:
         string filename;
         ifstream file;
+        Mesh* mesh;
+    void addFace(stringstream sline);
 
     public:
         ObjReader(string filename);
-        Mesh* readFile();
+        void readFile();
 };
 
 #endif // MESH_H

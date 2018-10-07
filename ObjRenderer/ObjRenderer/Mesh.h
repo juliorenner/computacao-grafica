@@ -21,14 +21,18 @@ class Mesh {
         vector<Group*> groups;
         int activeGroup;
         Shader* mainShader;
+        string materialFile;
 
     public:
         Mesh();
         void addMapping(float x, float y);
         void addVertex(float x, float y, float z);
         void addNormal(float x, float y, float z);
-        int newGroup(string name, string material);
+        int newGroup(string name);
+        vector<Group*> getGroups();
         void setActiveGroup(int groupPointer);
+        void setGroupMaterialID(string material);
+        void setMaterialFile(string materialFile);
         void addFace(vector<int> verts, vector<int> norms, vector<int> texts);
         void addFace(Face* face);
         void prepareGroupsVAO();

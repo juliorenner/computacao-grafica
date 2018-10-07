@@ -53,17 +53,7 @@ int main () {
 
     mesh->prepareGroupsVAO();
 
-    while (!glfwWindowShouldClose(window)) {
-        void processInput();
-        
-        glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        mesh->draw();
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();    
-    }
+    drawScene();
 
     glfwTerminate();
     return 0;
@@ -71,17 +61,23 @@ int main () {
     cout << "TESTE\n";
 }
 
-// void prepareVertexArray() {
-//     mesh->
-// }
-
  void read() {
      ObjReader* reader = new ObjReader("cube.obj");
      mesh = reader->readFile();
  }
 
 void drawScene() {
-
+    while (!glfwWindowShouldClose(window)) {
+        void processInput();
+        
+        glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        
+        mesh->draw();
+        
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
 }
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
