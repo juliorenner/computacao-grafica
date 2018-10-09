@@ -14,7 +14,6 @@ class ObjReader {
         string filename;
         ifstream file;
         Mesh* mesh;
-    void addFace(stringstream sline);
 
     public:
         ObjReader(string filename);

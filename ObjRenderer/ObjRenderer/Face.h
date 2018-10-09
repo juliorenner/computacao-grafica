@@ -19,10 +19,7 @@ class Face{
         void setTexts(vector<int> texts);
         vector<int> getVerts();
         vector<int> getNorms();
-
-        // void addVertexIndex(int index);
-        // void addNormalIndex(int index);
-        // void addTextureIndex(int index);
+        vector<int> getTexts();
 };  
 
 #endif // FACE_H

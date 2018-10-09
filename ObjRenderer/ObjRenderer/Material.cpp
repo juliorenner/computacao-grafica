@@ -1,9 +1,29 @@
 #include "Material.h"
 
-Material::Material(string file) {
-    this->file = file;
+Material::Material(string materialId) {
+    this->materialId = materialId;
 }
 
-string Material::getFile() {
-    return this->file;
+void Material::setMaterialId(string materialId) {
+    this->materialId = materialId;
+}
+
+void Material::setTextureFile(string textureFile) {
+    this->textureFile = textureFile;
+}
+
+void Material::setKa(float r, float g, float b) {
+    this->ka = glm::vec3(r, g, b);
+}
+
+void Material::setKd(float r, float g, float b) {
+    this->kd = glm::vec3(r, g, b);
+}
+
+void Material::setKs(float r, float g, float b) {
+    this->ks = glm::vec3(r, g, b);
+}
+
+void Material::setNs(float ns) {
+    this->ns = ns;
 }

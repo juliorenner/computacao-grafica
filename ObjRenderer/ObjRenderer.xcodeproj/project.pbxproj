@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C12F479D216A990500D28205 /* MaterialReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C12F479B216A990500D28205 /* MaterialReader.cpp */; };
 		C1E84F9C21531C56006979A3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1E84F9B21531C56006979A3 /* main.cpp */; };
 		C1E84FA421531C73006979A3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E84FA321531C73006979A3 /* OpenGL.framework */; };
 		C1E84FA621531C98006979A3 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E84FA521531C98006979A3 /* GLUT.framework */; };
@@ -52,6 +53,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C12F479B216A990500D28205 /* MaterialReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MaterialReader.cpp; sourceTree = "<group>"; };
+		C12F479E216AD09A00D28205 /* MaterialReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialReader.h; sourceTree = "<group>"; };
+		C12F479F216AD62300D28205 /* mesa.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mesa.mtl; sourceTree = "<group>"; };
 		C1E84F9821531C56006979A3 /* ObjRenderer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ObjRenderer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1E84F9B21531C56006979A3 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C1E84FA321531C73006979A3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -114,6 +118,8 @@
 		C1E84F9A21531C56006979A3 /* ObjRenderer */ = {
 			isa = PBXGroup;
 			children = (
+				C12F479E216AD09A00D28205 /* MaterialReader.h */,
+				C12F479F216AD62300D28205 /* mesa.mtl */,
 				C1E84FC4215328F1006979A3 /* cube.obj */,
 				C1E84FB021531EEF006979A3 /* Face.cpp */,
 				C1E84FAF21531EEF006979A3 /* Face.h */,
@@ -130,6 +136,7 @@
 				C1E84FB121531EF0006979A3 /* Shader.h */,
 				C1E84FB621531EF0006979A3 /* vs.glsl */,
 				C1E84F9B21531C56006979A3 /* main.cpp */,
+				C12F479B216A990500D28205 /* MaterialReader.cpp */,
 			);
 			path = ObjRenderer;
 			sourceTree = "<group>";
@@ -206,6 +213,7 @@
 			files = (
 				C1E84FBF21531EF1006979A3 /* ObjReader.cpp in Sources */,
 				C1E84FC121531EF1006979A3 /* Group.cpp in Sources */,
+				C12F479D216A990500D28205 /* MaterialReader.cpp in Sources */,
 				C1E84FBE21531EF1006979A3 /* Mesh.cpp in Sources */,
 				C1E84FBD21531EF1006979A3 /* Face.cpp in Sources */,
 				C1E84FC021531EF1006979A3 /* Material.cpp in Sources */,

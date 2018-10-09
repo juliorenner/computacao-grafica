@@ -3,18 +3,6 @@
 #include <iostream>
 using namespace std;
 
-// void Face::addNormalIndex(int index) {
-//     this->verts.push_back(index);
-// }
-
-// void Face::addTextureIndex(int index) {
-//     this->verts.push_back(index);
-// }
-
-// void Face::addVertexIndex(int index) {
-//     this->verts.push_back(index);
-// }
-
 void Face::addVertexInfo(int vertexIndex, int textureIndex, int normalIndex) {
     this->verts.push_back(vertexIndex);
     this->verts.push_back(textureIndex);
@@ -45,4 +33,8 @@ vector<int> Face::getVerts() {
 
 vector<int> Face::getNorms() {
     return this->norms;
+}
+
+vector<int> Face::getTexts() {
+    return this->texts;
 }

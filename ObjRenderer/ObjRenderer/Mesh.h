@@ -22,6 +22,7 @@ class Mesh {
         int activeGroup;
         Shader* mainShader;
         string materialFile;
+        string objFile;
 
     public:
         Mesh();
@@ -29,14 +30,18 @@ class Mesh {
         void addVertex(float x, float y, float z);
         void addNormal(float x, float y, float z);
         int newGroup(string name);
-        vector<Group*> getGroups();
+        void setObjFile(string objFile);
         void setActiveGroup(int groupPointer);
-        void setGroupMaterialID(string material);
+        void setGroupMaterialId(string material);
         void setMaterialFile(string materialFile);
         void addFace(vector<int> verts, vector<int> norms, vector<int> texts);
         void addFace(Face* face);
-        void prepareGroupsVAO();
-        void draw();
+        vector<Group*> getGroups();
+        vector<glm::vec3> getVertex();
+        vector<glm::vec3> getNormals();
+        vector<glm::vec2> getMappings();
+        Shader* getShader();
+        string getMaterialFile();
 };
 
 #endif // MESH_H

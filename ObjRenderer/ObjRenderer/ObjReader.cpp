@@ -7,11 +7,12 @@ ObjReader::ObjReader(string filename) {
     if(this->file.fail()) {
         printf("It was not possible to open the file\n");
     }
+    
+    this->mesh = new Mesh();
+    mesh->setObjFile(filename);
 };
 
 Mesh* ObjReader::readFile() {
-    this->mesh = new Mesh();
-    
     while(!this->file.eof()) {
         string line;
         getline(this->file, line);
@@ -71,12 +72,15 @@ Mesh* ObjReader::readFile() {
                 mesh->newGroup(groupName);
             }
         } else if (temp == "mtllib") {
-            //Duvida arquivo de material, 1 por objeto? separar em uma classe distinta faz sentido?
+            string materialFile;
+            sline >> materialFile;
+            mesh->setMaterialFile(materialFile);
+        } else if (temp == "usemtl") {
+            string materialId;
+            sline >> materialId;
+            mesh->setGroupMaterialId(materialId);
         }
     }
-    return mesh;
-}
-
-void ObjReader::addFace(stringstream sline) {
     
+    return mesh;
 }
