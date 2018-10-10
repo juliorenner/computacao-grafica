@@ -23,6 +23,8 @@ class Material {
         void setKs(float r, float g, float b);
         void setKd(float r, float g, float b);
         void setNs(float ns);
+        string getTextureFile();
+        string getMaterialid();
 };
 
 #endif // MATERIAL_H

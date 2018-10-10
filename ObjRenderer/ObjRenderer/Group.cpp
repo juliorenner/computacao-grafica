@@ -31,6 +31,10 @@ vector<Face*> Group::getFaces() {
     return this->faces;
 }
 
+string Group::getMaterial() {
+    return this->material;
+}
+
 void Group::setVAOIndex(GLuint vaoIndex) {
     this->VAO = vaoIndex;
 }

@@ -24,9 +24,10 @@ class Group {
         void addFace(vector<int> verts, vector<int> norms, vector<int> texts);
         void setMaterial(string material);
         void setName(string name);
-        vector<Face*> getFaces();
         void setVAOIndex(GLuint vaoIndex);
         GLuint getVAOIndex();
+        vector<Face*> getFaces();
+        string getMaterial();
 
 };
 

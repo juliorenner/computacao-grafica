@@ -27,3 +27,11 @@ void Material::setKs(float r, float g, float b) {
 void Material::setNs(float ns) {
     this->ns = ns;
 }
+
+string Material::getTextureFile() {
+    return this->textureFile;
+}
+
+string Material::getMaterialid() {
+    return this->materialId;
+}

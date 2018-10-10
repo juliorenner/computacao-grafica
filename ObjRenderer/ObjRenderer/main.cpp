@@ -7,8 +7,10 @@
 #include "Material.h"
 #include "MaterialReader.h"
 
-using namespace std;
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
+using namespace std;
 
 void read();
 void drawScene();
@@ -18,11 +20,14 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void processInput();
 void prepareGroupsVAO();
+Material* getMaterialObject(string materialId);
 
 GLFWwindow *window;
 
 const unsigned int SCR_WIDTH = 1000;
 const unsigned int SCR_HEIGHT = 1000;
+
+unsigned int texture;
 
 // camera
 glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f,  3.0f);
@@ -81,11 +86,13 @@ int main () {
     glewExperimental = GL_TRUE;
     glewInit();
     
+    // configure global opengl state
+    // -----------------------------
+    glEnable(GL_DEPTH_TEST);
+    
     read();
 
     prepareGroupsVAO();
-    
-//    prepareTextures();
 
     drawScene();
 
@@ -155,7 +162,52 @@ void prepareGroupsVAO() {
         glEnableVertexAttribArray(2);
         
         mesh->getGroups()[i]->setVAOIndex(VAO);
+        
+        if (mesh->getGroups()[i]->getMaterial() != "") {
+            
+            Material* material = getMaterialObject(mesh->getGroups()[i]->getMaterial());
+            
+            if (material != nullptr && material->getTextureFile() != "") {
+                // load and create a texture
+                // -------------------------
+                texture;
+                
+                glGenTextures(1, &texture);
+                glBindTexture(GL_TEXTURE_2D, texture);
+                // set the texture wrapping parameters
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+                // set texture filtering parameters
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                // load image, create texture and generate mipmaps
+                int width, height, nrChannels;
+                stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
+
+                unsigned char *data = stbi_load(material->getTextureFile().c_str(), &width, &height, &nrChannels, 0);
+                if (data)
+                {
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+                    glGenerateMipmap(GL_TEXTURE_2D);
+                }
+                else
+                {
+                    std::cout << "Failed to load texture" << std::endl;
+                }
+                stbi_image_free(data);
+            }
+        }
+        
     }
+}
+
+Material* getMaterialObject(string materialId) {
+    for (int i=0; i < materials.size(); i++) {
+        if (materials[i]->getMaterialid() == materialId) {
+            return materials[i];
+        }
+    }
+    return nullptr;
 }
 
 void drawScene() {
@@ -168,8 +220,8 @@ void drawScene() {
         
         processInput();
         
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         glm::mat4 projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         mesh->getShader()->setMat4("projection", projection);
@@ -181,6 +233,8 @@ void drawScene() {
         for (int i=0; i < mesh->getGroups().size(); i++) {
             GLuint VAO = mesh->getGroups()[i]->getVAOIndex();
             glBindVertexArray(VAO);
+            
+            glBindTexture(GL_TEXTURE_2D, texture);
             
             mesh->getShader()->use();
             
