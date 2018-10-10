@@ -43,7 +43,11 @@ Mesh* ObjReader::readFile() {
             string token, v, n, t;
             
             while (sline.rdbuf()->in_avail()) {
+                token = "";
                 sline >> token;
+                if (token == "") {
+                    break;
+                }
                 stringstream stoken(token);
                 
                 getline(stoken, v, '/');

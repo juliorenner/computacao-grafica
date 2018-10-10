@@ -50,7 +50,7 @@ float lastFrame = 0.0f;
 Mesh* mesh;
 vector<Material*> materials;
 
-string OBJ_FILE = "mesa.obj";
+string OBJ_FILE = "cenaPaintball.obj";
 
 int main () {
 

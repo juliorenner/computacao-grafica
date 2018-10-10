@@ -8,6 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		C12F479D216A990500D28205 /* MaterialReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C12F479B216A990500D28205 /* MaterialReader.cpp */; };
+		C12F47B3216DA85400D28205 /* trout.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47B1216DA82800D28205 /* trout.bmp */; };
+		C12F47B4216DA85400D28205 /* trout.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47B0216DA82800D28205 /* trout.mtl */; };
+		C12F47B5216DA85400D28205 /* trout.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47B2216DA82800D28205 /* trout.obj */; };
+		C12F47B6216DA85400D28205 /* arv_tronco.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47A7216DA81D00D28205 /* arv_tronco.png */; };
+		C12F47B7216DA85400D28205 /* arv_tronco.ptm in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47AD216DA81E00D28205 /* arv_tronco.ptm */; };
+		C12F47B8216DA85400D28205 /* cenaPaintball.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47AC216DA81E00D28205 /* cenaPaintball.mtl */; };
+		C12F47B9216DA85400D28205 /* cenaPaintball.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47AB216DA81D00D28205 /* cenaPaintball.obj */; };
+		C12F47BA216DA85400D28205 /* cópia de arv_tronco.ppm in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47AF216DA81E00D28205 /* cópia de arv_tronco.ppm */; };
+		C12F47BB216DA85400D28205 /* grama01.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47AA216DA81D00D28205 /* grama01.jpg */; };
+		C12F47BC216DA85400D28205 /* grama01.ppm in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47A8216DA81D00D28205 /* grama01.ppm */; };
+		C12F47BD216DA85400D28205 /* muro02.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47AE216DA81E00D28205 /* muro02.jpg */; };
+		C12F47BE216DA85400D28205 /* muro02.ppm in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47A9216DA81D00D28205 /* muro02.ppm */; };
+		C12F47BF216DA85400D28205 /* mesa01.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47A6216DA80E00D28205 /* mesa01.bmp */; };
+		C12F47C0216DA85400D28205 /* mesa01.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47A4216DA80E00D28205 /* mesa01.mtl */; };
+		C12F47C1216DA85400D28205 /* mesa01.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = C12F47A5216DA80E00D28205 /* mesa01.obj */; };
 		C1E84F9C21531C56006979A3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1E84F9B21531C56006979A3 /* main.cpp */; };
 		C1E84FA421531C73006979A3 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E84FA321531C73006979A3 /* OpenGL.framework */; };
 		C1E84FA621531C98006979A3 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E84FA521531C98006979A3 /* GLUT.framework */; };
@@ -22,7 +37,6 @@
 		C1E84FC121531EF1006979A3 /* Group.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1E84FBB21531EF0006979A3 /* Group.cpp */; };
 		C1E84FC72154924C006979A3 /* cube.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = C1E84FC4215328F1006979A3 /* cube.obj */; };
 		C1E84FC82154924C006979A3 /* fs.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = C1E84FB521531EF0006979A3 /* fs.glsl */; };
-		C1E84FC92154924C006979A3 /* mesa.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = C1E84FB721531EF0006979A3 /* mesa.obj */; };
 		C1E84FCA2154924C006979A3 /* vs.glsl in CopyFiles */ = {isa = PBXBuildFile; fileRef = C1E84FB621531EF0006979A3 /* vs.glsl */; };
 /* End PBXBuildFile section */
 
@@ -43,9 +57,23 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				C12F47B3216DA85400D28205 /* trout.bmp in CopyFiles */,
+				C12F47B4216DA85400D28205 /* trout.mtl in CopyFiles */,
+				C12F47B5216DA85400D28205 /* trout.obj in CopyFiles */,
+				C12F47B6216DA85400D28205 /* arv_tronco.png in CopyFiles */,
+				C12F47B7216DA85400D28205 /* arv_tronco.ptm in CopyFiles */,
+				C12F47B8216DA85400D28205 /* cenaPaintball.mtl in CopyFiles */,
+				C12F47B9216DA85400D28205 /* cenaPaintball.obj in CopyFiles */,
+				C12F47BA216DA85400D28205 /* cópia de arv_tronco.ppm in CopyFiles */,
+				C12F47BB216DA85400D28205 /* grama01.jpg in CopyFiles */,
+				C12F47BC216DA85400D28205 /* grama01.ppm in CopyFiles */,
+				C12F47BD216DA85400D28205 /* muro02.jpg in CopyFiles */,
+				C12F47BE216DA85400D28205 /* muro02.ppm in CopyFiles */,
+				C12F47BF216DA85400D28205 /* mesa01.bmp in CopyFiles */,
+				C12F47C0216DA85400D28205 /* mesa01.mtl in CopyFiles */,
+				C12F47C1216DA85400D28205 /* mesa01.obj in CopyFiles */,
 				C1E84FC72154924C006979A3 /* cube.obj in CopyFiles */,
 				C1E84FC82154924C006979A3 /* fs.glsl in CopyFiles */,
-				C1E84FC92154924C006979A3 /* mesa.obj in CopyFiles */,
 				C1E84FCA2154924C006979A3 /* vs.glsl in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,7 +83,22 @@
 /* Begin PBXFileReference section */
 		C12F479B216A990500D28205 /* MaterialReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MaterialReader.cpp; sourceTree = "<group>"; };
 		C12F479E216AD09A00D28205 /* MaterialReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaterialReader.h; sourceTree = "<group>"; };
-		C12F479F216AD62300D28205 /* mesa.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mesa.mtl; sourceTree = "<group>"; };
+		C12F47A0216D65F300D28205 /* stb_image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		C12F47A4216DA80E00D28205 /* mesa01.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mesa01.mtl; path = objs/mesa/mesa01.mtl; sourceTree = "<group>"; };
+		C12F47A5216DA80E00D28205 /* mesa01.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = mesa01.obj; path = objs/mesa/mesa01.obj; sourceTree = "<group>"; };
+		C12F47A6216DA80E00D28205 /* mesa01.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = mesa01.bmp; path = objs/mesa/mesa01.bmp; sourceTree = "<group>"; };
+		C12F47A7216DA81D00D28205 /* arv_tronco.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arv_tronco.png; path = objs/paintball/arv_tronco.png; sourceTree = "<group>"; };
+		C12F47A8216DA81D00D28205 /* grama01.ppm */ = {isa = PBXFileReference; lastKnownFileType = file; name = grama01.ppm; path = objs/paintball/grama01.ppm; sourceTree = "<group>"; };
+		C12F47A9216DA81D00D28205 /* muro02.ppm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = muro02.ppm; path = objs/paintball/muro02.ppm; sourceTree = "<group>"; };
+		C12F47AA216DA81D00D28205 /* grama01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = grama01.jpg; path = objs/paintball/grama01.jpg; sourceTree = "<group>"; };
+		C12F47AB216DA81D00D28205 /* cenaPaintball.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cenaPaintball.obj; path = objs/paintball/cenaPaintball.obj; sourceTree = "<group>"; };
+		C12F47AC216DA81E00D28205 /* cenaPaintball.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cenaPaintball.mtl; path = objs/paintball/cenaPaintball.mtl; sourceTree = "<group>"; };
+		C12F47AD216DA81E00D28205 /* arv_tronco.ptm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = arv_tronco.ptm; path = objs/paintball/arv_tronco.ptm; sourceTree = "<group>"; };
+		C12F47AE216DA81E00D28205 /* muro02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = muro02.jpg; path = objs/paintball/muro02.jpg; sourceTree = "<group>"; };
+		C12F47AF216DA81E00D28205 /* cópia de arv_tronco.ppm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "cópia de arv_tronco.ppm"; path = "objs/paintball/cópia de arv_tronco.ppm"; sourceTree = "<group>"; };
+		C12F47B0216DA82800D28205 /* trout.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = trout.mtl; path = objs/trout/trout.mtl; sourceTree = "<group>"; };
+		C12F47B1216DA82800D28205 /* trout.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = trout.bmp; path = objs/trout/trout.bmp; sourceTree = "<group>"; };
+		C12F47B2216DA82800D28205 /* trout.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = trout.obj; path = objs/trout/trout.obj; sourceTree = "<group>"; };
 		C1E84F9821531C56006979A3 /* ObjRenderer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ObjRenderer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1E84F9B21531C56006979A3 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C1E84FA321531C73006979A3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -72,7 +115,6 @@
 		C1E84FB421531EF0006979A3 /* ObjReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjReader.cpp; sourceTree = "<group>"; };
 		C1E84FB521531EF0006979A3 /* fs.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fs.glsl; sourceTree = "<group>"; };
 		C1E84FB621531EF0006979A3 /* vs.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vs.glsl; sourceTree = "<group>"; };
-		C1E84FB721531EF0006979A3 /* mesa.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mesa.obj; sourceTree = "<group>"; };
 		C1E84FB821531EF0006979A3 /* ObjReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjReader.h; sourceTree = "<group>"; };
 		C1E84FB921531EF0006979A3 /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
 		C1E84FBA21531EF0006979A3 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
@@ -118,8 +160,22 @@
 		C1E84F9A21531C56006979A3 /* ObjRenderer */ = {
 			isa = PBXGroup;
 			children = (
+				C12F47B1216DA82800D28205 /* trout.bmp */,
+				C12F47B0216DA82800D28205 /* trout.mtl */,
+				C12F47B2216DA82800D28205 /* trout.obj */,
+				C12F47A7216DA81D00D28205 /* arv_tronco.png */,
+				C12F47AD216DA81E00D28205 /* arv_tronco.ptm */,
+				C12F47AC216DA81E00D28205 /* cenaPaintball.mtl */,
+				C12F47AB216DA81D00D28205 /* cenaPaintball.obj */,
+				C12F47AF216DA81E00D28205 /* cópia de arv_tronco.ppm */,
+				C12F47AA216DA81D00D28205 /* grama01.jpg */,
+				C12F47A8216DA81D00D28205 /* grama01.ppm */,
+				C12F47AE216DA81E00D28205 /* muro02.jpg */,
+				C12F47A9216DA81D00D28205 /* muro02.ppm */,
+				C12F47A6216DA80E00D28205 /* mesa01.bmp */,
+				C12F47A4216DA80E00D28205 /* mesa01.mtl */,
+				C12F47A5216DA80E00D28205 /* mesa01.obj */,
 				C12F479E216AD09A00D28205 /* MaterialReader.h */,
-				C12F479F216AD62300D28205 /* mesa.mtl */,
 				C1E84FC4215328F1006979A3 /* cube.obj */,
 				C1E84FB021531EEF006979A3 /* Face.cpp */,
 				C1E84FAF21531EEF006979A3 /* Face.h */,
@@ -128,7 +184,6 @@
 				C1E84FB321531EF0006979A3 /* Group.h */,
 				C1E84FB921531EF0006979A3 /* Material.cpp */,
 				C1E84FBA21531EF0006979A3 /* Material.h */,
-				C1E84FB721531EF0006979A3 /* mesa.obj */,
 				C1E84FB221531EF0006979A3 /* Mesh.cpp */,
 				C1E84FBC21531EF0006979A3 /* Mesh.h */,
 				C1E84FB421531EF0006979A3 /* ObjReader.cpp */,
@@ -137,6 +192,7 @@
 				C1E84FB621531EF0006979A3 /* vs.glsl */,
 				C1E84F9B21531C56006979A3 /* main.cpp */,
 				C12F479B216A990500D28205 /* MaterialReader.cpp */,
+				C12F47A0216D65F300D28205 /* stb_image.h */,
 			);
 			path = ObjRenderer;
 			sourceTree = "<group>";
