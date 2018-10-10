@@ -25,6 +25,10 @@ class Material {
         void setNs(float ns);
         string getTextureFile();
         string getMaterialid();
+        glm::vec3 getKa();
+        glm::vec3 getKd();
+        glm::vec3 getKs();
+        float getNs();
 };
 
 #endif // MATERIAL_H

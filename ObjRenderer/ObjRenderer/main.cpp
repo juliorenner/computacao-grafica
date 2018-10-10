@@ -27,6 +27,8 @@ GLFWwindow *window;
 const unsigned int SCR_WIDTH = 1000;
 const unsigned int SCR_HEIGHT = 1000;
 
+glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+
 unsigned int texture;
 
 // camera
@@ -111,6 +113,8 @@ int main () {
 
 void prepareGroupsVAO() {
     vector<float> vs;
+    
+    mesh->getShader()->setInt("material.tex", 0);
     
     for (int i=0; i < mesh->getGroups().size(); i++) {
         vector<Face*> faces = mesh->getGroups()[i]->getFaces();
@@ -223,12 +227,27 @@ void drawScene() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        glm::mat4 projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        mesh->getShader()->setMat4("projection", projection);
+        mesh->getShader()->use();
+        mesh->getShader()->setVec3("light.position", lightPos);
+        mesh->getShader()->setVec3("viewPos", cameraPos);
+    
         
-        // camera/view transformation
+        // material properties
+        mesh->getShader()->setFloat("material.shininess", 64.0f);
+        
+        glm::mat4 projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+        
+        mesh->getShader()->setMat4("projection", projection);
         mesh->getShader()->setMat4("view", view);
+        
+        // calculate the model matrix for each object and pass it to shader before drawing
+        glm::mat4 model;
+//        model = model, glm::vec3( 0.0f,  0.0f,  0.0f));
+//        float angle = 20.0f * 8;
+//        model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+        mesh->getShader()->setMat4("model", model);
+        
         
         for (int i=0; i < mesh->getGroups().size(); i++) {
             GLuint VAO = mesh->getGroups()[i]->getVAOIndex();
@@ -236,14 +255,14 @@ void drawScene() {
             
             glBindTexture(GL_TEXTURE_2D, texture);
             
-            mesh->getShader()->use();
-            
-            // calculate the model matrix for each object and pass it to shader before drawing
-            glm::mat4 model;
-            model = glm::translate(model, glm::vec3( 0.0f,  0.0f,  0.0f));
-            float angle = 20.0f * 8;
-            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-            mesh->getShader()->setMat4("model", model);
+            if (mesh->getGroups()[i]->getMaterial() != "") {
+                Material* material = getMaterialObject(mesh->getGroups()[i]->getMaterial());
+                
+                // light properties
+                mesh->getShader()->setVec3("light.ambient", material->getKa());
+                mesh->getShader()->setVec3("light.diffuse", material->getKd());
+                mesh->getShader()->setVec3("light.specular", material->getKs());
+            }
             
             glDrawArrays(GL_TRIANGLES, 0, mesh->getGroups()[i]->getFaces().size() * 3);
         }
@@ -296,7 +315,7 @@ void processInput()
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
     
-    float cameraSpeed = 2.5 * deltaTime;
+    float cameraSpeed = 5 * deltaTime;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         cameraPos += cameraSpeed * cameraFront;
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)

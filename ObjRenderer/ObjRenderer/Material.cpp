@@ -35,3 +35,19 @@ string Material::getTextureFile() {
 string Material::getMaterialid() {
     return this->materialId;
 }
+
+glm::vec3 Material::getKs() {
+    return this->ks;
+}
+
+glm::vec3 Material::getKa() {
+    return this->ka;
+}
+
+glm::vec3 Material::getKd() {
+    return this->kd;
+}
+
+float Material::getNs() {
+    return this->ns;
+}
