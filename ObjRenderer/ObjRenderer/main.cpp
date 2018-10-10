@@ -29,8 +29,6 @@ const unsigned int SCR_HEIGHT = 1000;
 
 glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
-unsigned int texture;
-
 // camera
 glm::vec3 cameraPos   = glm::vec3(0.0f, 0.0f,  3.0f);
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
@@ -50,7 +48,7 @@ float lastFrame = 0.0f;
 Mesh* mesh;
 vector<Material*> materials;
 
-string OBJ_FILE = "cenaPaintball.obj";
+string OBJ_FILE = "trout.obj";
 
 int main () {
 
@@ -165,6 +163,7 @@ void prepareGroupsVAO() {
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
         glEnableVertexAttribArray(2);
         
+        
         mesh->getGroups()[i]->setVAOIndex(VAO);
         
         if (mesh->getGroups()[i]->getMaterial() != "") {
@@ -174,33 +173,38 @@ void prepareGroupsVAO() {
             if (material != nullptr && material->getTextureFile() != "") {
                 // load and create a texture
                 // -------------------------
-                texture;
-                
-                glGenTextures(1, &texture);
-                glBindTexture(GL_TEXTURE_2D, texture);
-                // set the texture wrapping parameters
+                unsigned int textureID;
+
+                glGenTextures(1, &textureID);
+                glBindTexture(GL_TEXTURE_2D, textureID);
+
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-                // set texture filtering parameters
+
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-                // load image, create texture and generate mipmaps
+                
                 int width, height, nrChannels;
-                stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-
+//                stbi_set_flip_vertically_on_load(true);
                 unsigned char *data = stbi_load(material->getTextureFile().c_str(), &width, &height, &nrChannels, 0);
                 if (data)
                 {
+                    
                     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
                     glGenerateMipmap(GL_TEXTURE_2D);
                 }
                 else
                 {
-                    std::cout << "Failed to load texture" << std::endl;
+                    std::cout << "Texture failed to load at path: " << material->getTextureFile().c_str() << std::endl;
                 }
+
+                mesh->getGroups()[i]->setTextureIndex(textureID);
+                
                 stbi_image_free(data);
             }
         }
+        
+        glBindVertexArray(0);
         
     }
 }
@@ -233,7 +237,7 @@ void drawScene() {
     
         
         // material properties
-        mesh->getShader()->setFloat("material.shininess", 64.0f);
+        
         
         glm::mat4 projection = glm::perspective(glm::radians(fov), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
@@ -253,12 +257,14 @@ void drawScene() {
             GLuint VAO = mesh->getGroups()[i]->getVAOIndex();
             glBindVertexArray(VAO);
             
-            glBindTexture(GL_TEXTURE_2D, texture);
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, mesh->getGroups()[i]->getTextureIndex());
             
             if (mesh->getGroups()[i]->getMaterial() != "") {
                 Material* material = getMaterialObject(mesh->getGroups()[i]->getMaterial());
                 
                 // light properties
+                mesh->getShader()->setFloat("material.shininess", material->getNs());
                 mesh->getShader()->setVec3("light.ambient", material->getKa());
                 mesh->getShader()->setVec3("light.diffuse", material->getKd());
                 mesh->getShader()->setVec3("light.specular", material->getKs());
@@ -315,7 +321,7 @@ void processInput()
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
     
-    float cameraSpeed = 5 * deltaTime;
+    float cameraSpeed = 15 * deltaTime;
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         cameraPos += cameraSpeed * cameraFront;
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)

@@ -42,6 +42,8 @@ class Mesh {
         vector<glm::vec2> getMappings();
         Shader* getShader();
         string getMaterialFile();
+    
+        bool isInitialGroup = true;
 };
 
 #endif // MESH_H

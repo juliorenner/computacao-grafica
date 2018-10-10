@@ -53,7 +53,7 @@ void Mesh::setMaterialFile(string materialFile) {
 
 string Mesh::getMaterialFile() {
     string materialFile;
-    if (this->materialFile.size() > 0) {
+    if (this->materialFile.length() > 0) {
         materialFile = this->materialFile;
     } else {
         materialFile = this->objFile.substr(0, this->objFile.find(".")) + ".mtl";
