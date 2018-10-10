@@ -15,7 +15,7 @@ class Group {
         string name;
         string material;
         vector<Face*> faces;
-        GLuint VAO = 0;
+        GLuint VAO, textureIndex = 0;
 
     public:
         int vertexLength = 0;
@@ -24,10 +24,12 @@ class Group {
         void addFace(vector<int> verts, vector<int> norms, vector<int> texts);
         void setMaterial(string material);
         void setName(string name);
+        void setTextureIndex(GLuint index);
         void setVAOIndex(GLuint vaoIndex);
         GLuint getVAOIndex();
         vector<Face*> getFaces();
         string getMaterial();
+        GLuint getTextureIndex();
 
 };
 

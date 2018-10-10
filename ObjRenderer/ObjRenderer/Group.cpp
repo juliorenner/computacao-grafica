@@ -42,3 +42,11 @@ void Group::setVAOIndex(GLuint vaoIndex) {
 GLuint Group::getVAOIndex() {
     return this->VAO;
 }
+
+GLuint Group::getTextureIndex() {
+    return this->textureIndex;
+}
+
+void Group::setTextureIndex(GLuint index) {
+    this->textureIndex = index;
+}
