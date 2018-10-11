@@ -68,13 +68,31 @@ Mesh* ObjReader::readFile() {
             
             mesh->addFace(vert, norm, text);
         } else if (temp == "g") {
-            string groupName;
+           string groupName;
             sline >> groupName;
             if (mesh->getGroups().size() == 1) {
                 mesh->getGroups()[0]->setName(groupName);
             } else {
                 mesh->newGroup(groupName);
             }
+
+            // string groupName;
+            // string part;
+            // sline >> groupName;
+            // while (sline.rdbuf()->in_avail()) {
+            //     sline >> part;
+            //     if (part == "") {
+            //         break;
+            //     }
+            //     groupName = groupName + " " + part;
+            // }
+            
+            // if (mesh->getGroups().size() == 1 && mesh->isInitialGroup) {
+            //     mesh->getGroups()[0]->setName(groupName);
+            //     mesh->isInitialGroup = false;
+            // } else {
+            //     mesh->newGroup(groupName);
+            // }
         } else if (temp == "mtllib") {
             string materialFile;
             sline >> materialFile;
