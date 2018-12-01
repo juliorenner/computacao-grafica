@@ -12,6 +12,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
+#include <math.h>
 
 using namespace std;
 
@@ -33,6 +34,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 void processInput(GLFWwindow *window);
 void calculateControlPointSpline();
+void calculateInternalAndExternalCurves();
 void load(GLuint VAO, GLuint VBO, vector<float> &vertix);
 
 int main(int argc, const char * argv[]) {
@@ -43,14 +45,14 @@ int main(int argc, const char * argv[]) {
     
     glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 3);
-//    glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     
     #ifdef __APPLE__
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
     #endif
     
-    window = glfwCreateWindow (SCR_WIDTH, SCR_HEIGHT, "OpenGL exercise", NULL, NULL);
+    window = glfwCreateWindow (SCR_WIDTH, SCR_HEIGHT, "Object Writer", NULL, NULL);
     
     if (!window) {
         fprintf (stderr, "ERROR: could not open window with GLFW3\n");
@@ -76,10 +78,10 @@ int main(int argc, const char * argv[]) {
     
     glGenBuffers(1, &INT_VBO);
     glGenVertexArrays(1, &INT_VAO);
-    
+
     glGenBuffers(1, &EXT_VBO);
     glGenVertexArrays(1, &EXT_VAO);
-    
+
     mainShader = new Shader("vs.glsl", "fs.glsl");
     
     // render loop
@@ -100,16 +102,22 @@ int main(int argc, const char * argv[]) {
         
         mainShader->setMat4("projection", projection);
     
+        glBindVertexArray(CP_VAO);
+        glDrawArrays(GL_LINE_STRIP, 0, cpVertix.size()/2);
+        
         if(cpVertix.size() >= 8) {
-            glBindVertexArray(CP_VAO);
-            glDrawArrays(GL_LINE_STRIP, 0, cpVertix.size()/2);
             
             glBindVertexArray(CP_SPLINE_VAO);
             glDrawArrays(GL_LINE_STRIP, 0, cpSplineVertix.size()/2);
+
+            glBindVertexArray(INT_VAO);
+            glDrawArrays(GL_LINE_STRIP, 0, iVertix.size()/2);
             
-            
-            glBindVertexArray(0);
+            glBindVertexArray(EXT_VAO);
+            glDrawArrays(GL_LINE_STRIP, 0, eVertix.size()/2);
         }
+        
+        glBindVertexArray(0);
         
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
@@ -152,22 +160,23 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         cpVertix.push_back((float)xpos);
         cpVertix.push_back((float)ypos);
         
-        if(cpVertix.size() >= 4 && cpVertix.size() % 2 == 0) {
+        if(cpVertix.size() >= 8 && cpVertix.size() % 2 == 0) {
             calculateControlPointSpline();
+            calculateInternalAndExternalCurves();
             load(CP_SPLINE_VAO, CP_SPLINE_VBO, cpSplineVertix);
+            load(INT_VAO, INT_VBO, iVertix);
+            load(EXT_VAO, EXT_VBO, eVertix);
         }
         
         load(CP_VAO, CP_VBO, cpVertix);
-//        load(INT_VAO, INT_VBO, iVertix);
-//        load(EXT_VAO, EXT_VBO, eVertix);
     }
 }
 
 void calculateControlPointSpline() {
     cpSplineVertix.clear();
-    double t = 0.05;
+    double j = 0.05;
     for (int i = 0; i < cpVertix.size(); i+=2) {
-        for (double j = 0; j <= 1; j+=t) {
+        for (double t = 0; t <= 1; t+=j) {
             float x = ((
                         (-1*pow(t,3) +3*pow(t,2) -3*t +1) * (cpVertix[i]) +
                         ( 3*pow(t,3) -6*pow(t,2) +0*t +4) * (cpVertix[(i+2) % cpVertix.size()]) +
@@ -186,6 +195,47 @@ void calculateControlPointSpline() {
     }
 }
 
+void calculateInternalAndExternalCurves() {
+    iVertix.clear();
+    eVertix.clear();
+    for (int i = 0; i < cpSplineVertix.size(); i+=2) {
+        double ax = cpSplineVertix[i % cpSplineVertix.size()];
+        double ay = cpSplineVertix[(i+1) % cpSplineVertix.size()];
+        
+        double bx = cpSplineVertix[(i+2) % cpSplineVertix.size()];
+        double by = cpSplineVertix[(i+3) % cpSplineVertix.size()];
+        
+        double w = bx - ax;
+        double h = by - ay;
+        
+        double angle = atan(h/w);
+        
+        float internalAngle;
+        float externalAngle;
+        
+        if (w<0) {
+            internalAngle = angle + M_PI/2;
+            externalAngle = angle - M_PI/2;
+        } else {
+            internalAngle = angle - M_PI/2;
+            externalAngle = angle + M_PI/2;
+        }
+        
+        float iCX = cos(internalAngle)*15 + ax;
+        float iCY = sin(internalAngle)*15 + ay;
+        
+        float eCX = cos(externalAngle)*15 + ax;
+        float eCY = sin(externalAngle)*15 + ay;
+        
+        iVertix.push_back(iCX);
+        iVertix.push_back(iCY);
+        
+        eVertix.push_back(eCX);
+        eVertix.push_back(eCY);
+    }
+    
+}
+
 void load(GLuint VAO, GLuint VBO, vector<float> &vertix)
 {
     glBindVertexArray(VAO);
@@ -193,7 +243,7 @@ void load(GLuint VAO, GLuint VBO, vector<float> &vertix)
     glBufferData(GL_ARRAY_BUFFER, vertix.size()*sizeof(float), vertix.data(), GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), NULL);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
