@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/juliorenner/Documents/git/computacao-grafica/Object Writer/Object Writer/fs_cp.glsl">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/juliorenner/Documents/git/computacao-grafica/Object Writer/Object Writer/vs_cp.glsl">
+   </FileRef>
+   <FileRef
       location = "self:Object Writer.xcodeproj">
    </FileRef>
 </Workspace>

@@ -16,6 +16,8 @@
 		C1AB1B3B21AF52F1006A5E32 /* libGLEW.2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C1AB1B3921AF52F1006A5E32 /* libGLEW.2.1.0.dylib */; };
 		C1AB1B3C21AF52F1006A5E32 /* libglfw.3.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C1AB1B3A21AF52F1006A5E32 /* libglfw.3.2.dylib */; };
 		C1AB1B3E21AF52FC006A5E32 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1AB1B3D21AF52FC006A5E32 /* GLUT.framework */; };
+		C1AB1B4021B36202006A5E32 /* vs_cp.glsl in Copy Files */ = {isa = PBXBuildFile; fileRef = C1AB1B3F21B361F2006A5E32 /* vs_cp.glsl */; };
+		C1AB1B4221B36322006A5E32 /* fs_cp.glsl in Copy Files */ = {isa = PBXBuildFile; fileRef = C1AB1B4121B36238006A5E32 /* fs_cp.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				C1AB1B4221B36322006A5E32 /* fs_cp.glsl in Copy Files */,
+				C1AB1B4021B36202006A5E32 /* vs_cp.glsl in Copy Files */,
 				C1AB1B3021AF520D006A5E32 /* fs.glsl in Copy Files */,
 				C1AB1B3121AF520D006A5E32 /* vs.glsl in Copy Files */,
 			);
@@ -38,7 +42,6 @@
 		C1AB1B2521AF51BC006A5E32 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		C1AB1B2C21AF51EE006A5E32 /* fs.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fs.glsl; sourceTree = "<group>"; };
 		C1AB1B2D21AF51EE006A5E32 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
-		C1AB1B2E21AF51EE006A5E32 /* vs_internal.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vs_internal.glsl; sourceTree = "<group>"; };
 		C1AB1B2F21AF51EE006A5E32 /* vs.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vs.glsl; sourceTree = "<group>"; };
 		C1AB1B3321AF521E006A5E32 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		C1AB1B3521AF5245006A5E32 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -46,6 +49,8 @@
 		C1AB1B3921AF52F1006A5E32 /* libGLEW.2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.1.0.dylib; path = ../../../../../../usr/local/lib/libGLEW.2.1.0.dylib; sourceTree = "<group>"; };
 		C1AB1B3A21AF52F1006A5E32 /* libglfw.3.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.3.2.dylib; path = ../../../../../../usr/local/Cellar/glfw/3.2.1/lib/libglfw.3.2.dylib; sourceTree = "<group>"; };
 		C1AB1B3D21AF52FC006A5E32 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		C1AB1B3F21B361F2006A5E32 /* vs_cp.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = vs_cp.glsl; path = "/Users/juliorenner/Documents/git/computacao-grafica/Object Writer/Object Writer/vs_cp.glsl"; sourceTree = "<absolute>"; };
+		C1AB1B4121B36238006A5E32 /* fs_cp.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = fs_cp.glsl; path = "/Users/juliorenner/Documents/git/computacao-grafica/Object Writer/Object Writer/fs_cp.glsl"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +90,10 @@
 		C1AB1B2421AF51BC006A5E32 /* Object Writer */ = {
 			isa = PBXGroup;
 			children = (
+				C1AB1B4121B36238006A5E32 /* fs_cp.glsl */,
+				C1AB1B3F21B361F2006A5E32 /* vs_cp.glsl */,
 				C1AB1B2C21AF51EE006A5E32 /* fs.glsl */,
 				C1AB1B2D21AF51EE006A5E32 /* Shader.h */,
-				C1AB1B2E21AF51EE006A5E32 /* vs_internal.glsl */,
 				C1AB1B2F21AF51EE006A5E32 /* vs.glsl */,
 				C1AB1B2521AF51BC006A5E32 /* main.cpp */,
 			);
