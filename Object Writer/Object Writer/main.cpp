@@ -8,11 +8,13 @@
 #include <GL/glew.h> /* include GLEW and new version of GL on Windows */
 #include <GLFW/glfw3.h>
 #include <iostream>
-#include "Shader.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
 #include <math.h>
+#include "Mesh.h"
+#include "Face.h"
+#include "Shader.h"
 
 #define BUFSIZE 512
 
@@ -25,11 +27,12 @@ const unsigned int SCR_HEIGHT = 600;
 
 Shader* cpShader;
 Shader* curvesShader;
+Mesh* mesh;
 
 GLuint CP_VBO, CP_SPLINE_VBO, INT_VBO, EXT_VBO;
 GLuint CP_VAO, CP_SPLINE_VAO, INT_VAO, EXT_VAO;
 
-// Modes: (E) edit = 0 (D) draw = 1 (Z) select mode = 2
+// Modes: (E) edit = 0 (D) draw = 1 (Z) select mode = 2 (C) create object
 GLuint renderMode = 0;
 GLuint selectedPointIndex = -15;
 
@@ -48,6 +51,7 @@ void updateZIndex(bool isIncreasing);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 void loadCurves(GLuint VAO, GLuint VBO, vector<float> &vertix);
 void loadControlPoints();
+void createObject();
 
 
 int main(int argc, const char * argv[]) {
@@ -185,6 +189,60 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         updateZIndex(key == GLFW_KEY_UP);
         loadControlPoints();
     }
+    
+    if (key == GLFW_KEY_C && action == GLFW_PRESS) {
+        createObject();
+    }
+}
+
+void createObject() {
+    mesh = new Mesh();
+    
+    for (int i = 0; i < iVertix.size(); i += 3) {
+        mesh->addVertex(iVertix[i]/SCR_WIDTH, iVertix[i+1]/SCR_HEIGHT, iVertix[i+2]);
+        mesh->addVertex(eVertix[i]/SCR_WIDTH, eVertix[i+1]/SCR_HEIGHT, eVertix[i+2]);
+        
+        int vertSize = mesh->getVertex().size();
+        vector<Face*> faces = mesh->getGroups()[0]->getFaces();
+        if (faces.size() > 0) {
+            Face* lastFace = faces[faces.size() - 1];
+            int vertexPos = 0;
+            if (i % 2 == 1)
+                vertexPos = -1;
+            
+            lastFace->addVertexInfo(vertSize + vertexPos, NULL, NULL);
+            
+            vector<int> vert2;
+            vert2.push_back(vertSize-2);
+            vert2.push_back(vertSize-1);
+            vert2.push_back(vertSize);
+            mesh->addFace(vert2, vector<int>(), vector<int>());
+        }
+        
+        vector<int> verts;
+                          
+        verts.push_back(vertSize-1);
+        verts.push_back(vertSize);
+                          
+        mesh->addFace(verts, vector<int>(), vector<int>());
+    }
+
+// May be needed
+//    if (faces.size() > 0) {
+//        Face* lastFace = faces[faces.size() - 1];
+//        int vertexPos = 0;
+//        if (i % 2 == 1)
+//            vertexPos = -1;
+//
+//        lastFace->addVertexInfo(vertSize + vertexPos, NULL, NULL);
+//
+//        vector<int> vert2;
+//        vert2.push_back(vertSize-2);
+//        vert2.push_back(vertSize-1);
+//        vert2.push_back(vertSize);
+//        mesh->addFace(vert2, vector<int>(), vector<int>());
+//    }
+    
 }
 
 void updateZIndex(bool isIncreasing) {
