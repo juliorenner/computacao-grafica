@@ -82,7 +82,7 @@ vector<glm::vec3> Mesh::getNormals() {
 }
 
 void Mesh::exportToFile() {
-    ofstream file("track.obj", fstream::out);
+    fstream file("track.obj", fstream::out);
     
     if(file.is_open()) {
         file << "g" << "\n";
@@ -103,13 +103,13 @@ void Mesh::exportToFile() {
             
             for (int j=0; j < f->getVerts().size(); j++) {
                 if (j < f->getNorms().size() && j < f->getTexts().size()) {
-                    file << " " << f->getVerts()[i] << "/" << f->getNorms()[i] << "/" << f->getTexts()[i];
+                    file << " " << f->getVerts()[j] << "/" << f->getNorms()[j] << "/" << f->getTexts()[j];
                 } else if (j < f->getNorms().size()) {
-                    file << " " << f->getVerts()[i] << "/" << f->getNorms()[i];
+                    file << " " << f->getVerts()[j] << "/" << f->getNorms()[j];
                 } else if (j < f->getTexts().size()) {
-                    file << " " << f->getVerts()[i] << "/" << "/" << f->getTexts()[i];
+                    file << " " << f->getVerts()[j] << "/" << "/" << f->getTexts()[j];
                 } else {
-                    file << " " << f->getVerts()[i] << "/" << "/";
+                    file << " " << f->getVerts()[j] << "/" << "/";
                 }
             }
             file << "\n";
