@@ -18,6 +18,9 @@
 		C1AB1B3E21AF52FC006A5E32 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1AB1B3D21AF52FC006A5E32 /* GLUT.framework */; };
 		C1AB1B4021B36202006A5E32 /* vs_cp.glsl in Copy Files */ = {isa = PBXBuildFile; fileRef = C1AB1B3F21B361F2006A5E32 /* vs_cp.glsl */; };
 		C1AB1B4221B36322006A5E32 /* fs_cp.glsl in Copy Files */ = {isa = PBXBuildFile; fileRef = C1AB1B4121B36238006A5E32 /* fs_cp.glsl */; };
+		C1AB1B4521B4862D006A5E32 /* Face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1AB1B4321B4862C006A5E32 /* Face.cpp */; };
+		C1AB1B4A21B48835006A5E32 /* Group.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1AB1B4721B48835006A5E32 /* Group.cpp */; };
+		C1AB1B4B21B48835006A5E32 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1AB1B4921B48835006A5E32 /* Mesh.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,7 +42,7 @@
 
 /* Begin PBXFileReference section */
 		C1AB1B2221AF51BC006A5E32 /* Object Writer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Object Writer"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C1AB1B2521AF51BC006A5E32 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		C1AB1B2521AF51BC006A5E32 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../../../Desktop/main.cpp; sourceTree = "<group>"; };
 		C1AB1B2C21AF51EE006A5E32 /* fs.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fs.glsl; sourceTree = "<group>"; };
 		C1AB1B2D21AF51EE006A5E32 /* Shader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shader.h; sourceTree = "<group>"; };
 		C1AB1B2F21AF51EE006A5E32 /* vs.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vs.glsl; sourceTree = "<group>"; };
@@ -51,6 +54,12 @@
 		C1AB1B3D21AF52FC006A5E32 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C1AB1B3F21B361F2006A5E32 /* vs_cp.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = vs_cp.glsl; path = "/Users/juliorenner/Documents/git/computacao-grafica/Object Writer/Object Writer/vs_cp.glsl"; sourceTree = "<absolute>"; };
 		C1AB1B4121B36238006A5E32 /* fs_cp.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = fs_cp.glsl; path = "/Users/juliorenner/Documents/git/computacao-grafica/Object Writer/Object Writer/fs_cp.glsl"; sourceTree = "<absolute>"; };
+		C1AB1B4321B4862C006A5E32 /* Face.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Face.cpp; sourceTree = "<group>"; };
+		C1AB1B4421B4862C006A5E32 /* Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Face.h; sourceTree = "<group>"; };
+		C1AB1B4621B48834006A5E32 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
+		C1AB1B4721B48835006A5E32 /* Group.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Group.cpp; sourceTree = "<group>"; };
+		C1AB1B4821B48835006A5E32 /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		C1AB1B4921B48835006A5E32 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +99,12 @@
 		C1AB1B2421AF51BC006A5E32 /* Object Writer */ = {
 			isa = PBXGroup;
 			children = (
+				C1AB1B4721B48835006A5E32 /* Group.cpp */,
+				C1AB1B4821B48835006A5E32 /* Group.h */,
+				C1AB1B4921B48835006A5E32 /* Mesh.cpp */,
+				C1AB1B4621B48834006A5E32 /* Mesh.h */,
+				C1AB1B4321B4862C006A5E32 /* Face.cpp */,
+				C1AB1B4421B4862C006A5E32 /* Face.h */,
 				C1AB1B4121B36238006A5E32 /* fs_cp.glsl */,
 				C1AB1B3F21B361F2006A5E32 /* vs_cp.glsl */,
 				C1AB1B2C21AF51EE006A5E32 /* fs.glsl */,
@@ -169,6 +184,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1AB1B4521B4862D006A5E32 /* Face.cpp in Sources */,
+				C1AB1B4A21B48835006A5E32 /* Group.cpp in Sources */,
+				C1AB1B4B21B48835006A5E32 /* Mesh.cpp in Sources */,
 				C1AB1B2621AF51BC006A5E32 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
